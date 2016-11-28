@@ -53,8 +53,9 @@ EOF && \
     pear install XML_Parser && \
     pear config-set preferred_state alpha && \
     pear install VersionControl_SVN-0.4.0 && \
-    pear install Net_LDAP2 && \
-    sed -i 's/locate/true/g' build/ubuntu/build-*.xml && \
+    pear install Net_LDAP2
+
+RUN sed -i 's/locate/true/g' build/ubuntu/build-*.xml && \
     sed -i 's/psql/true/g' build/ubuntu/build-*.xml && \
     sed -i 's/service/true/g' build/ubuntu/build-*.xml && \
     sed -i 's/httpd.servername=academico.instituicao.com.br/httpd.servername=localhost/g' ./properties/ubuntu/build-httpd.properties && \
