@@ -61,8 +61,9 @@ EOF && \
     sed -i 's/httpd.servername=academico.instituicao.com.br/httpd.servername=localhost/g' ./properties/build-httpd.properties && \
     phing -Ddeploy.syncdb=false && \
     rm -rf /instalador/package && \ 
-    a2dissite 000-default && a2dissite default-ssl
-    
+    a2dissite 000-default && \
+    a2dissite default-ssl && \
+    sed -i 's/    ServerName localhost//g' /etc/apache2/sites-enabled/localhost.conf
 
 RUN mkdir /etc/service/apache
 ADD runit.sh /etc/service/apache/run

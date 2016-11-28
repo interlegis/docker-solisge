@@ -6,15 +6,16 @@ if [ ! -z $SAGU_PSQL_PASSWORD ]; then
   SAGU_PSQL_PASSWORD=$POSTGRESQL_ENV_POSTGRESQL_PASSWORD
 fi
 
-echo "Configuring database connection..."
-sed -i "s/password=postgres/password=${SAGU_PSQL_PASSWORD}/g" /instalador/properties/build-db.properties 
-sed -i "s/ip=localhost/ip=postgresql/g" /instalador/properties/build-db.properties 
-sed -i "s/<host>localhost<\/host>/<host>postgresql<\/host>/g" /var/www/solisge/miolo20/etc/miolo.conf 
-sed -i "s/<host>localhost<\/host>/<host>postgresql<\/host>/g" /var/www/solisge/miolo25/etc/miolo.conf 
-sed -i "s/<host>localhost<\/host>/<host>postgresql<\/host>/g" /var/www/solisge/miolo26/etc/miolo.conf 
-sed -i "s/<password>postgres<\/password>/<password>${SAGU_PSQL_PASSWORD}<\/password>/g" /var/www/solisge/miolo20/etc/miolo.conf 
-sed -i "s/<password>postgres<\/password>/<password>${SAGU_PSQL_PASSWORD}<\/password>/g" /var/www/solisge/miolo25/etc/miolo.conf 
-sed -i "s/<password>postgres<\/password>/<password>${SAGU_PSQL_PASSWORD}<\/password>/g" /var/www/solisge/miolo26/etc/miolo.conf 
+echo -n "Configuring database connection..." && \
+sed -i "s/password=postgres/password=${SAGU_PSQL_PASSWORD}/g" /instalador/properties/build-db.properties && \
+sed -i "s/ip=localhost/ip=postgresql/g" /instalador/properties/build-db.properties && \
+sed -i "s/<host>localhost<\/host>/<host>postgresql<\/host>/g" /var/www/solisge/miolo20/etc/miolo.conf && \
+sed -i "s/<host>localhost<\/host>/<host>postgresql<\/host>/g" /var/www/solisge/miolo25/etc/miolo.conf && \
+sed -i "s/<host>localhost<\/host>/<host>postgresql<\/host>/g" /var/www/solisge/miolo26/etc/miolo.conf && \
+sed -i "s/<password>postgres<\/password>/<password>${SAGU_PSQL_PASSWORD}<\/password>/g" /var/www/solisge/miolo20/etc/miolo.conf && \
+sed -i "s/<password>postgres<\/password>/<password>${SAGU_PSQL_PASSWORD}<\/password>/g" /var/www/solisge/miolo25/etc/miolo.conf && \
+sed -i "s/<password>postgres<\/password>/<password>${SAGU_PSQL_PASSWORD}<\/password>/g" /var/www/solisge/miolo26/etc/miolo.conf && \
+echo " OK." 
 
 psqlcheck() {
   # Wait for PostgreSQL to be available...
