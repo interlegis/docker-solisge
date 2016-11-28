@@ -2,6 +2,7 @@
 SAGU_PSQL_USERNAME=postgres
 SAGU_PSQL_DATABASE=solisge
 SAGU_PSQL_PASSWORD=sagupw
+SAGU_SERVER_NAME=localhost
 if [ ! -z $SAGU_PSQL_PASSWORD ]; then
   SAGU_PSQL_PASSWORD=$POSTGRESQL_ENV_POSTGRESQL_PASSWORD
 fi
@@ -46,6 +47,8 @@ psqlcheck() {
 }
 
 psqlcheck
+
+sed -i "s/    ServerName localhost/    ServerName $SAGU_SERVER_NAME/g" /etc/apache2/sites-enabled/localhost.conf
 
 source /etc/apache2/envvars
 exec apache2 -D FOREGROUND

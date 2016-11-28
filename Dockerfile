@@ -55,7 +55,8 @@ EOF && \
     pear install VersionControl_SVN-0.4.0 && \
     pear install Net_LDAP2
 
-RUN sed -i 's/locate/true/g' build/ubuntu/build-*.xml && \
+RUN cd instalador && \
+    sed -i 's/locate/true/g' build/ubuntu/build-*.xml && \
     sed -i 's/psql/true/g' build/ubuntu/build-*.xml && \
     sed -i 's/service/true/g' build/ubuntu/build-*.xml && \
     sed -i 's/httpd.servername=academico.instituicao.com.br/httpd.servername=localhost/g' ./properties/ubuntu/build-httpd.properties && \
