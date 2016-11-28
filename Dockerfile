@@ -6,7 +6,8 @@ ENV OS=ubuntu \
     TERM=xterm
 
 RUN localedef -i pt_BR -c -f ISO-8859-1 pt_BR && \
-    localedef -i pt_BR -c -f UTF-8 pt_BR
+    localedef -i pt_BR -c -f UTF-8 pt_BR && \
+    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 
 RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) multiverse" && \
     apt-get update && apt-get upgrade -y && \
@@ -23,7 +24,7 @@ RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) 
                        unoconv \
                        default-jre \
                        php-pear \
-                       #ttf-mscorefonts-installer \
+                       ttf-mscorefonts-installer \
                        python2.7 \
                        python-psycopg2 \
                        sendmail \
@@ -60,11 +61,13 @@ EOF && \
     sed -i 's/httpd.servername=academico.instituicao.com.br/httpd.servername=localhost/g' ./properties/build-httpd.properties && \
     phing -Ddeploy.syncdb=false && \
     rm -rf /instalador/package && \ 
-    chown www-data:www-data /var/www/solisge -R && \
     a2dissite 000-default && a2dissite default-ssl
     
 
 RUN mkdir /etc/service/apache
 ADD runit.sh /etc/service/apache/run
+
+ADD make_files_dir.sh /instalador/
+RUN /instalador/make_files_dir.sh 
 
 EXPOSE 80

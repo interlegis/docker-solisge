@@ -30,7 +30,7 @@ psqlcheck() {
     fi
   done
   exists=`psql -h postgresql -p 5432 -U $SAGU_PSQL_USERNAME -lqt | grep ${SAGU_PSQL_DATABASE}`
-  if [ "$exists" != "0" ]; then
+  if [ $? != 0 ]; then
     echo -n "Database does not exist. Importing SAGU (SOLISGE) schema..."
     cd /instalador && \
     tar zxvf /var/www/solisge/miolo20/modules/basic/sql/sagu.sql.tar.gz && \

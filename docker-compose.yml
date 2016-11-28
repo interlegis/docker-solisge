@@ -4,7 +4,11 @@ sagu:
     - postgresql
   ports:
     - "80:80"
+  volumes:
+    - 'sagu_files:/var/solisge-files'
 postgresql:
   image: 'bitnami/postgresql:latest'
   environment:
     - POSTGRESQL_PASSWORD=password123
+  volumes:
+    - 'sagu_psql_db:/bitnami/postgresql'
