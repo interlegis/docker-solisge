@@ -1,0 +1,10 @@
+sagu:
+  build: .
+  links:
+    - postgresql
+  ports:
+    - "80:80"
+postgresql:
+  image: 'bitnami/postgresql:latest'
+  environment:
+    - POSTGRESQL_PASSWORD=password123
