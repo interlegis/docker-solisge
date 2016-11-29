@@ -34,7 +34,7 @@ sagu:
     - 'sagu_files:/var/solisge-files'
 
 postgresql:
-  image: 'postgresql:alpine'
+  image: 'postgresql:9.3-alpine'
   environment:
     - POSTGRESQL_PASSWORD=password123
   volumes:
@@ -49,7 +49,8 @@ cd <folder where docker-compose.yaml is>
 docker-compose up -d
 ```
 
-You must set the following variable inside postgresql.conf for SolisGE (Sagu) to work correctly:
+Compatible with PostgreSQL up to 9.3. 
+In addition, you must set the following variable inside postgresql.conf for SolisGE (Sagu) to work correctly:
 
 ```
 standard_conforming_strings = off
