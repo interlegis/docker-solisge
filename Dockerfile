@@ -70,6 +70,8 @@ RUN mkdir /etc/service/apache
 ADD runit.sh /etc/service/apache/run
 
 ADD make_files_dir.sh /instalador/
-RUN /instalador/make_files_dir.sh 
+RUN /instalador/make_files_dir.sh
+
+VOLUME /var/solisge-files 
 
 EXPOSE 80
