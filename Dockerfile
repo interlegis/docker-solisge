@@ -27,7 +27,6 @@ RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) 
                        ttf-mscorefonts-installer \
                        python2.7 \
                        python-psycopg2 \
-                       sendmail \
                        php-apc \
                        php5-curl \
                        php5-memcached \
