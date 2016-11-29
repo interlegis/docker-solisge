@@ -64,7 +64,7 @@ RUN cd instalador && \
     rm -rf /instalador/package && \ 
     a2dissite 000-default && \
     a2dissite default-ssl && \
-    sed -i 's/    ServerName localhost//g' /etc/apache2/sites-enabled/localhost.conf
+    sed -i 's/    ServerName localhost/    SetEnvIf X-Forwarded-Proto https HTTPS=on/g' /etc/apache2/sites-enabled/localhost.conf
 
 RUN mkdir /etc/service/apache
 ADD runit.sh /etc/service/apache/run
